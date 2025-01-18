@@ -1,0 +1,11 @@
+<div class="course-list-container">
+    <div class="course-list" *ngFor="let i of courses">
+        <app-course-item [course]="i" 
+        (deletCourse)="deleteCourse($event)" 
+        (editCourse)="editCourse($event)">
+    </app-course-item>
+    </div>
+    <div class="course-list-button">
+        <p-button styleClass="button-rounded-bordless backgrnd-white" label="Load more" iconPos="right" />
+    </div>
+</div>

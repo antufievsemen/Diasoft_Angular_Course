@@ -1,0 +1,13 @@
+<header>
+    <div class="header">
+        <div class="logo"><app-logo></app-logo></div>
+        <div class="menu">
+            <div class="profile">
+                <p-button styleClass="button-rounded-bordless backgrnd-white" rounded="true" [label]="user.firstName" icon="pi pi-user" (click)="openProfile()"></p-button>
+            </div>
+            <div class="exit">
+                <p-button styleClass="button-rounded-bordless backgrnd-white" label="Logout" variant="text" icon="pi pi-sign-out" (click)="logOut()"></p-button>
+            </div>
+        </div>
+    </div>
+</header>

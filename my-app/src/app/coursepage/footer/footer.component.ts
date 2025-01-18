@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-
+  corporation: string = 'Diasoft';
+  pageName: string = 'Быстрый старт Angular 2025';
 }
