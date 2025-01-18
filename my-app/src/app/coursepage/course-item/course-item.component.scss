@@ -1,0 +1,33 @@
+.course-container {
+    margin: 1rem;
+    border: 3px solid white;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.course-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.course-header,
+.course-body {
+    margin: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+}
+
+.right-side {
+    margin-left: auto;
+    display: flex;
+}
+
+.header-duration {
+    margin-right: 1rem;
+}
+
+.course-button-remove,
+.course-button-edit {
+    padding: 0.2rem;
+    padding-right: 1rem;
+}
