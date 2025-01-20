@@ -1,10 +1,12 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from 'src/app/domain/course';
 
 @Component({
   selector: 'app-course-item',
   templateUrl: './course-item.component.html',
-  styleUrls: ['./course-item.component.scss']
+  styleUrls: ['./course-item.component.scss'],
+  providers: [TitleCasePipe]
 })
 export class CourseItemComponent {
   @Input()

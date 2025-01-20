@@ -1,23 +1,29 @@
-<div class="course-container">
-    <div class="course-header">
-        <span class="course-title"> {{course.title}}</span>
-        <div class="right-side">
-            <div class="header-duration">
-                <i class="pi pi-clock" style="font-size: 0.8rem"></i>
-                <span class="course-duration"> {{ course.duration }}</span>
-
+<div [highlighter]="course.creationDate">
+    <div class="course-container" [ngClass]="{ 'top-rated-background' : course.topRated}">
+        <div class="course-header">
+            <div class="title-container">
+                <span class="course-title"> {{course.title | titlecase }}</span>
+                <i class="pi pi-star star" [ngClass]="{ 'display-none' : !course.topRated}" style="font-size: 1.5rem;"></i>
             </div>
-            <div class="header-creation-date">
-                <i class="pi pi-calendar" style="font-size: 0.8rem"></i>
-                <span class="course-creation-date"> {{ course.creationDate }}</span>
+            <div class="right-side">
+                <div class="header-duration">
+                    <i class="pi pi-clock" style="font-size: 0.8rem"></i>
+                    <span class="course-duration"> {{ course.duration | duration }}</span>
+                </div>
+                <div class="header-creation-date">
+                    <i class="pi pi-calendar" style="font-size: 0.8rem"></i>
+                    <span class="course-creation-date"> {{ course.creationDate |  date:'mediumDate':'UTC'}}</span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="course-body">
-        <p class="course-description"> {{ course.description }}</p>
-        <div class="course-buttons right-side">
-            <p-button class="course-button-remove" styleClass="button-rounded-bordless backgrnd-white red-button" icon="pi pi-trash" />
-            <p-button class="course-button-edit" styleClass="button-rounded-bordless backgrnd-white blue-button" icon="pi pi-pencil" />
+        <div class="course-body">
+            <p class="course-description"> {{ course.description }}</p>
+            <div class="course-buttons right-side">
+                <p-button class="course-button-remove" styleClass="button-rounded-bordless backgrnd-white red-button"
+                    icon="pi pi-trash" />
+                <p-button class="course-button-edit" styleClass="button-rounded-bordless backgrnd-white blue-button"
+                    icon="pi pi-pencil" />
+            </div>
         </div>
     </div>
 </div>
