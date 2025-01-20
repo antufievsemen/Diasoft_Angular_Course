@@ -10,9 +10,13 @@ import { LogoComponent } from './coursepage/logo/logo.component';
 import { FooterComponent } from './coursepage/footer/footer.component';
 import { CourseItemComponent } from './coursepage/course-item/course-item.component';
 import { CourseListComponent } from './coursepage/course-list/course-list.component';
-import { CoursesheaderComponent } from './coursepage/coursesheader/coursesheader.component';
 import { BreadcrumbsComponent } from './coursepage/breadcrumbs/breadcrumbs.component';
 import { FormsModule } from '@angular/forms';
+import { HighlighterDirective } from './coursepage/course-item/directive/highlighter.directive';
+import { TitleCasePipe } from '@angular/common';
+import { DurationPipe } from './coursepage/course-item/pipe/duration.pipe';
+import { OrderByPipe } from './coursepage/course-list/pipe/order-by.pipe';
+import { FilterPipe } from './coursepage/course-list/pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,8 +26,11 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     CourseItemComponent,
     CourseListComponent,
-    CoursesheaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    HighlighterDirective,
+    DurationPipe,
+    OrderByPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
