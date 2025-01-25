@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './coursepage/auth.service';
+import { User } from './domain/user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  constructor(private authService: AuthService){}
+
+  public isAuthenticated() : boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  public login(user: User) {
+    if (!this.authService.isAuthenticated()) {
+      this.authService.login(user);
+    }
+  }
 }
