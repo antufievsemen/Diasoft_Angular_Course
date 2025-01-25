@@ -11,6 +11,7 @@ import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DurationPipe } from 'src/app/shared/pipe/duration.pipe';
 import { HighlighterDirective } from 'src/app/shared/directive/highlighter.directive';
+import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
 
 
 
@@ -29,7 +30,8 @@ import { HighlighterDirective } from 'src/app/shared/directive/highlighter.direc
     ToastModule,
     BrowserAnimationsModule,
     DurationPipe,
-    HighlighterDirective
+    HighlighterDirective,
+    OrderByPipe
   ],
   exports: [
     CourseListComponent,

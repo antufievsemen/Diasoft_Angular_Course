@@ -8,7 +8,8 @@ import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss']
+  styleUrls: ['./course-list.component.scss'],
+  providers: [MessageService, ConfirmationService, OrderByPipe, FilterPipe]
 })
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
@@ -17,14 +18,12 @@ export class CourseListComponent implements OnInit {
   constructor(private orderPipe: OrderByPipe,
     private filterPipe: FilterPipe,
     private courseService: CourseService,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.courses = this.courseService.getList();
     this.courses = this.orderPipe.transform(this.courses, 'creationDate');
   }
-
 
   public search(): void {
     this.courses = this.filterPipe.transform(this.courses, this.searchInput);
