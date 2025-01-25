@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[highlighter]'
+  selector: '[highlighter]',
+  standalone: true
 })
 export class HighlighterDirective {
   @Input('highlighter')
