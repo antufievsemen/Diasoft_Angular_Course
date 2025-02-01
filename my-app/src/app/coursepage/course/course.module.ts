@@ -12,10 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DurationPipe } from 'src/app/shared/pipe/duration.pipe';
 import { HighlighterDirective } from 'src/app/shared/directive/highlighter.directive';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
-import { CourseAddComponent } from './course-add/course-add.component';
-import { AuthorsComponent } from './authors/authors.component';
-import { CalendarModule } from 'primeng/calendar';
-import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -23,9 +19,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
   declarations: [
     CourseListComponent,
     CourseItemComponent,
-    FilterPipe,
-    CourseAddComponent,
-    AuthorsComponent
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -37,9 +31,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     BrowserAnimationsModule,
     DurationPipe,
     HighlighterDirective,
-    OrderByPipe,
-    CalendarModule,
-    InputNumberModule
+    OrderByPipe
   ],
   exports: [
     CourseListComponent,
