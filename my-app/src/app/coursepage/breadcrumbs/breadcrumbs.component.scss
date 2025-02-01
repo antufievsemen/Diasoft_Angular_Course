@@ -1,0 +1,22 @@
+.breadcrumbs-container {
+    margin: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    height: 3rem;
+}
+
+.text {
+    padding-left: 0.7rem;
+}
+
+.breadcrumbs {
+    margin-left: 1rem;
+    padding: 0.8rem;
+    
+}
+
+::ng-deep .button-style {
+    border-radius: 50px;
+}

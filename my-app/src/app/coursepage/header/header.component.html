@@ -1,0 +1,14 @@
+<header>
+    <div class="header">
+        <div class="logo"><app-logo></app-logo></div>
+        <div class="menu" *ngIf="this.user">
+            <div class="profile">
+                <p-button styleClass="button-rounded-bordless backgrnd-white" rounded="true" [label]="this.user.firstName" icon="pi pi-user" (click)="openProfile()"></p-button>
+                <span></span>
+            </div>
+            <div class="exit">
+                <p-button (onClick)="logout()" styleClass="button-rounded-bordless backgrnd-white" label="Logout" variant="text" icon="pi pi-sign-out"></p-button>
+            </div>
+        </div>
+    </div>
+</header>
