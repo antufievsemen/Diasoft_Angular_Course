@@ -1,0 +1,27 @@
+<app-breadcrumbs [title]="displayName"></app-breadcrumbs>
+<div class="course-add-form">
+    <div class="displayName-field m-8rem">
+        <p>Наименование*</p>
+        <input type="text" pInputText [(ngModel)]="displayName" id="displayName" />
+    </div>
+    <div class="description-field m-8rem">
+        <p>Описание*</p>
+        <textarea rows="5" cols="30" pTextarea [(ngModel)]="description" id="description"></textarea>
+    </div>
+    <div class="duration-field m-8rem">
+        <p>Продолжительность*</p>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="duration" id="duration" />
+        <span class="duration-view"> {{ duration | duration}}</span>
+    </div>
+    <div class="creationDate-filed m-8rem">
+        <p>Дата*</p>
+        <p-calendar [(ngModel)]="creationDate" [showIcon]="true" [showOnFocus]="false" inputId="buttondisplay" />
+    </div>
+    <div class="m-8rem">
+        <app-authors></app-authors>
+    </div>
+    <div class="button-container">
+        <p-button (onClick)="cancel()" styleClass="button-rounded-bordless backgrnd-white" class="m-6rem" label="cancel" iconPos="right" />
+        <p-button (onClick)="save()" styleClass="button-rounded-bordless blue-button" class="m-6rem" label="save" iconPos="right" />
+    </div>
+</div>

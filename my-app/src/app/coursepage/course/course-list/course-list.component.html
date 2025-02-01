@@ -1,4 +1,5 @@
-<!-- <div class="course-list-container">
+<div class="course-list-container">
+    <app-breadcrumbs></app-breadcrumbs>
     <div class="course-header-container">
         <div class="search-container">
             <input class="search-input" type="text" pInputText [(ngModel)]="searchInput" />
@@ -6,7 +7,7 @@
                 (onClick)="search()" />
         </div>
         <div class="options-container">
-            <p-button styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
+            <p-button (onClick)="addCourse()" styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
                 severity="info" />
         </div>
     </div>
@@ -26,5 +27,4 @@
         </div>
     </div>
 
-</div> -->
-<app-course-add></app-course-add>
+</div>

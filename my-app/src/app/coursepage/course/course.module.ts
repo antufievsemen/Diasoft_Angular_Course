@@ -8,7 +8,6 @@ import { CourseItemComponent } from './course-item/course-item.component';
 import { FilterPipe } from './course-list/pipe/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DurationPipe } from 'src/app/shared/pipe/duration.pipe';
 import { HighlighterDirective } from 'src/app/shared/directive/highlighter.directive';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
@@ -16,6 +15,10 @@ import { CourseAddComponent } from './course-add/course-add.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CourseEditComponent } from './course-edit/course-edit.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { RouterModule } from '@angular/router';
+import { CourseRouteModule } from './course-route/course-route.module';
 
 
 
@@ -25,7 +28,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CourseItemComponent,
     FilterPipe,
     CourseAddComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    CourseEditComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     CommonModule,
@@ -34,16 +39,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ButtonModule,
     FormsModule,
     ToastModule,
-    BrowserAnimationsModule,
     DurationPipe,
     HighlighterDirective,
     OrderByPipe,
     CalendarModule,
-    InputNumberModule
+    InputNumberModule,
+    CourseRouteModule,
+    RouterModule
   ],
-  exports: [
-    CourseListComponent,
-    CourseItemComponent
-  ]
 })
 export class CourseModule { }
