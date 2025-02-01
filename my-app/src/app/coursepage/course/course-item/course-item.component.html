@@ -20,9 +20,9 @@
         <div class="course-body">
             <p class="course-description"> {{ course.description }}</p>
             <div class="course-buttons right-side">
-                <p-button (onClick)="delete()" class="course-button-remove"
+                <p-button (onClick)="this.deleteCourse.emit(this.course)" class="course-button-remove"
                     styleClass="button-rounded-bordless backgrnd-white red-button" icon="pi pi-trash" />
-                <p-button (onClick)="edit()" class="course-button-edit"
+                <p-button (onClick)="this.editCourse.emit(course)" class="course-button-edit"
                     styleClass="button-rounded-bordless backgrnd-white blue-button" icon="pi pi-pencil" />
             </div>
         </div>
