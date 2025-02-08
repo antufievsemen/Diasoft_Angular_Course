@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CourseListComponent } from '../course-list/course-list.component';
 import { CourseService } from '../course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/domain/course';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-course-edit',
@@ -25,13 +26,12 @@ export class CourseEditComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.params.subscribe(data => {
       this.id = data['id'];
-      let course = this.courseService.getItemById(this.id);
-      if (course) {
+      this.courseService.getItemById(this.id).subscribe(course => {
         this.displayName = course.title;
-        this.creationDate = course.creationDate;
+        this.creationDate = new Date(course.creationDate);
         this.description = course.description;
         this.duration = course.duration;
-      }
+      });
     });
   }
 
@@ -40,7 +40,7 @@ export class CourseEditComponent implements OnInit {
     this.router.navigate(['courses']);
   }
 
-  public save(): void {
+  public edit(): void {
     this.courseService.update({
       id: this.id,
       title: this.displayName,
@@ -48,7 +48,7 @@ export class CourseEditComponent implements OnInit {
       duration: this.duration,
       description: this.description,
       topRated: false
-    });
+    }).pipe(take(1)).subscribe();
     this.router.navigate(['courses']);
   }
 }

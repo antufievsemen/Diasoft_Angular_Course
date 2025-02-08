@@ -11,16 +11,21 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private authService: AuthService,
     private router: Router
-  ){}
+  ) { }
 
-  public isAuthenticated() : boolean {
+  public isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
   public login(user: User) {
     if (!this.authService.isAuthenticated()) {
-      this.authService.login(user);
-      this.router.navigate(['courses']);
+      this.authService.login(user).subscribe(data => {
+        if (data && data[0]) {
+          localStorage.setItem('token', data[0].fakeToken);
+          this.router.navigate(['courses']);
+        }
+      });
+
     }
   }
 }

@@ -1,48 +1,41 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { findIndex } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Course } from 'src/app/domain/course';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  courses: Course[] = [];
-  constructor() {
-    let fut = new Date();
-    let pre = new Date();
-    fut.setDate(fut.getDate() - 7);
-    pre.setDate(pre.getDate() + 7);
+  private readonly apiUrl = '/videocourses';
 
-    this.courses = [{ id: 1, title: 'test', creationDate: fut, description: 'Lorem ipsum', duration: 100, topRated: false },
-    { id: 2, title: 'test2', creationDate: pre, description: 'Lorem ipsum 2', duration: 150, topRated: true }
-    ];
+  constructor(private readonly httpClient: HttpClient) {
   }
 
-  public getList(): Course[] {
-    return this.courses;
+  public getList(count: number = 5): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${this.apiUrl}?_start=0&_limit=${count}`);
   }
 
-  public createCourse(course: Course): Course {
-    return {} as Course;
+  public createCourse(course: Course): Observable<Course> {
+    return this.httpClient.post<Course>(`${this.apiUrl}`, course);
   }
 
-  public getItemById(id: number): Course {
-    return this.courses.filter(a => a.id === Number(id))[0];
+  public getItemById(id: number): Observable<Course> {
+    return this.httpClient.get<Course>(`${this.apiUrl}/${id}`);
   }
 
-  public update(course: Course): Course {
-    let old = this.courses.find(c => c.id === Number(course.id))
-    if (old) {
-      old.creationDate = course.creationDate;
-      old.description = course.description;
-      old.duration = course.duration;
-      old.title = course.title;
-      return old;
+  public update(course: Course): Observable<Course> {
+    return this.httpClient.put<Course>(`${this.apiUrl}/${course.id}`, course);
+  }
+
+  public remove(course: Course): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/${course.id}`);
+  }
+
+  public filterCourses(search: string): Observable<Course[]> {
+    if (search == '') {
+      return this.getList();  
     }
-    return course;
-  }
-
-  public remove(course: Course): void {
-    this.courses = this.courses.filter(a => a !== course);
+    return this.httpClient.get<Course[]>(`${this.apiUrl}?q=${search}`);
   }
 }

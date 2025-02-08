@@ -3,7 +3,8 @@
         <div class="logo"><app-logo></app-logo></div>
         <div class="menu" *ngIf="isAuthenticated()">
             <div class="profile">
-                <p-button styleClass="button-rounded-bordless backgrnd-white" rounded="true" [label]="getDisplayName()" icon="pi pi-user" (click)="openProfile()"></p-button>
+                <p-button styleClass="button-rounded-bordless backgrnd-white" [label]="displayName" rounded="true" icon="pi pi-user" (click)="openProfile()">
+                </p-button>
                 <span></span>
             </div>
             <div class="exit">

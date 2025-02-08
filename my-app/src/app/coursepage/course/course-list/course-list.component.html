@@ -7,7 +7,7 @@
                 (onClick)="search()" />
         </div>
         <div class="options-container">
-            <p-button (onClick)="addCourse()" styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
+            <p-button (onClick)="navigateAddCourse()" styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
                 severity="info" />
         </div>
     </div>
@@ -19,11 +19,11 @@
     <p-confirmDialog></p-confirmDialog>
     <div *ngIf="courses.length">
         <div class="course-list" *ngFor="let i of courses">
-            <app-course-item [course]="i" (deleteCourse)="deleteCourse($event)" (editCourse)="editCourse($event)">
+            <app-course-item [course]="i" (deleteCourse)="deleteCourse($event)" (editCourse)="navigateEditCourse($event)">
             </app-course-item>
         </div>
         <div class="course-list-button">
-            <p-button styleClass="button-rounded-bordless backgrnd-white" label="Load more" iconPos="right" />
+            <p-button (onClick)="loadMore()" styleClass="button-rounded-bordless backgrnd-white" label="Load more" iconPos="right" />
         </div>
     </div>
 

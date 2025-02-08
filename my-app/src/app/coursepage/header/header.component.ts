@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { User } from 'src/app/domain/user';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/domain/user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  @Input()
+  displayName: string = 'none';
 
   constructor(
     private authService: AuthService,
     private router: Router) {
   }
+  ngOnInit(): void {
+    this.authService.getUserInfo().subscribe(user => {
+      if (user.firstName) {
+        this.displayName = user.firstName + ' ' + user.lastName;
+      }
+    })
+  }
 
   public openProfile(): void {
-    console.log('Open profile' + this.authService.getUserInfo()?.firstName);
   }
 
   public logout(): void {
@@ -27,10 +35,5 @@ export class HeaderComponent {
 
   public isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
-  }
-
-  public getDisplayName(): string {
-    const userInfo = this.authService.getUserInfo();
-    return userInfo?.firstName ? userInfo.firstName : 'none';
   }
 }

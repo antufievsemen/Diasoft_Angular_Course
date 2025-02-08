@@ -1,5 +1,4 @@
 import { inject, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { CourseAddComponent } from '../course-add/course-add.component';
 import { CourseEditComponent } from '../course-edit/course-edit.component';

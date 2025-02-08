@@ -5,6 +5,7 @@ import { CourseService } from '../course.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
 import { Router } from '@angular/router';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
   searchInput: string = '';
+  limit: number = 10;
 
   constructor(private orderPipe: OrderByPipe,
     private filterPipe: FilterPipe,
@@ -23,20 +25,26 @@ export class CourseListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.courses = this.courseService.getList();
-    this.courses = this.orderPipe.transform(this.courses, 'creationDate');
+    this.courseService.getList().subscribe(data => {
+      this.courses = this.orderPipe.transform(data, 'creationDate');
+    });
   }
 
   public search(): void {
-    this.courses = this.filterPipe.transform(this.courses, this.searchInput);
+    this.courseService.filterCourses(this.searchInput).subscribe(data => {
+      this.courses = this.orderPipe.transform(data, 'creationDate');
+    })
   }
 
-  public addCourse(): void {
+  public navigateAddCourse(): void {
     this.router.navigate(['courses', 'new'])
   }
 
   public loadMore(): void {
-    console.log('Load more');
+    this.courseService.getList(this.limit).subscribe(data => {
+      this.courses = this.orderPipe.transform(data, 'creationDate');
+    });
+    this.limit = this.limit + 5;
   }
 
   public deleteCourse(course: Course): void {
@@ -46,17 +54,16 @@ export class CourseListComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       closeOnEscape: true,
       accept: () => {
-        this.courseService.remove(course);
-        this.courses = this.courseService.getList();
+        this.courseService.remove(course).pipe(take(1)).subscribe();
+        this.courses = this.courses.filter(c => c.id != course.id)
       },
       reject: () => {
         console.log('Delete action was rejected');
       }
     });
-
   }
 
-  public editCourse(course: Course): void {
+  public navigateEditCourse(course: Course): void {
     this.router.navigate(['courses/', course.id])
   }
 }
