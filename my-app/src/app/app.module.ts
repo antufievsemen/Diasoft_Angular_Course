@@ -15,6 +15,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutesModule } from './app-routes/app-routes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpTokenInterceptor } from './coursepage/httptokeninterceptor.service';
+import { LoadingComponent } from './loading/loading.component';
+import { HttpErrorInterceptor } from './coursepage/httperrorinterceptor.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,7 @@ import { HttpTokenInterceptor } from './coursepage/httptokeninterceptor.service'
     LogoComponent,
     FooterComponent,
     NotFoundComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,10 +39,15 @@ import { HttpTokenInterceptor } from './coursepage/httptokeninterceptor.service'
     FormsModule,
     LoginModule,
     AppRoutesModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
-    {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true}
+  { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+  { provide: MessageService, useClass: MessageService},
+  { provide: ConfirmationService, useClass: ConfirmationService}
   ],
   bootstrap: [AppComponent],
 })

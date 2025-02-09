@@ -34,11 +34,9 @@ import { CourseRouteModule } from './course-route/course-route.module';
   ],
   imports: [
     CommonModule,
-    ConfirmDialogModule,
     CardModule,
     ButtonModule,
     FormsModule,
-    ToastModule,
     DurationPipe,
     HighlighterDirective,
     OrderByPipe,

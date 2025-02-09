@@ -1,28 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/domain/user';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  @Input()
-  displayName: string = 'none';
+export class HeaderComponent implements OnInit, OnDestroy {
+  public displayName: string = '';
+  public userInfo$: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
     private router: Router) {
   }
+
+  ngOnDestroy(): void {
+    this.userInfo$?.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.authService.getUserInfo().subscribe(user => {
-      if (user.firstName) {
-        this.displayName = user.firstName + ' ' + user.lastName;
-      }
-    })
+    this.userInfo$ = this.authService.getUserInfo().subscribe(data => { 
+      if (data && data.firstName)
+      this.displayName = data.firstName + ' ' + data.lastName });
   }
 
   public openProfile(): void {
