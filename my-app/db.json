@@ -52,7 +52,20 @@
       "creationDate": "2025-02-13T21:00:00.000Z",
       "duration": 111,
       "description": "awdawd",
-      "topRated": false
+      "authors": [
+        {
+          "id": "5b7a84628298a95c17462193",
+          "name": "Carey Jarvis"
+        },
+        {
+          "id": "5b7a8462cf7298e6d925d18c",
+          "name": "Shelby Hanson"
+        },
+        {
+          "id": "5b7a8462db677f5f1fedd275",
+          "name": "Baird Bright"
+        }
+      ]
     },
     {
       "id": 9664,
@@ -596,23 +609,59 @@
       "id": 9822
     },
     {
-      "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": [
-          {
-            "name": "Authorization",
-            "value": "58ebfdf7ec92657b493b24da",
-            "op": "a"
-          }
-        ],
-        "headers": {},
-        "lazyInit": {
-          "normalizedNames": {},
-          "lazyUpdate": null,
-          "headers": {}
+      "title": "1231",
+      "creationDate": "2025-02-09T21:16:04.532Z",
+      "duration": 11,
+      "description": "123123",
+      "id": 9824
+    },
+    {
+      "title": "awdaw",
+      "creationDate": "2025-02-09T21:17:52.091Z",
+      "duration": 11,
+      "description": "awda",
+      "id": 9825
+    },
+    {
+      "title": "33333333",
+      "creationDate": "2025-02-27T21:00:00.000Z",
+      "duration": 333,
+      "description": "333333",
+      "id": 9826
+    },
+    {
+      "title": "awda",
+      "creationDate": "2025-02-13T16:08:22.097Z",
+      "duration": 11,
+      "description": "awdawd",
+      "id": 9827
+    },
+    {
+      "title": "5555",
+      "creationDate": "2025-02-13T16:13:06.205Z",
+      "duration": 11,
+      "description": "123123",
+      "id": 9828
+    },
+    {
+      "title": "123123",
+      "creationDate": "2025-02-13T16:25:26.491Z",
+      "duration": 11,
+      "description": "awdawd",
+      "id": 9829
+    },
+    {
+      "title": "awdawd",
+      "creationDate": "2025-02-13T16:49:16.968Z",
+      "duration": 11,
+      "description": "awdawda",
+      "authors": [
+        {
+          "id": "5b7a846205bf3180ca002c82",
+          "name": "Wall Sandoval"
         }
-      },
-      "id": 9823
+      ],
+      "id": 9830
     }
   ],
   "users": [
