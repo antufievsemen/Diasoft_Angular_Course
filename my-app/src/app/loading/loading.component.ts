@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingService } from './loading.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loading',
@@ -8,9 +9,9 @@ import { LoadingService } from './loading.service';
 })
 export class LoadingComponent {
 
-  constructor(private loadingService: LoadingService)  {}
+  constructor(private loadingService: LoadingService) { }
 
-  public isLoading(): boolean {
+  public isLoading(): Observable<boolean> {
     return this.loadingService.getState();
   }
 }

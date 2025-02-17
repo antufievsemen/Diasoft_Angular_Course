@@ -5,6 +5,10 @@ import { CourseService } from '../course.service';
 import { take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Author } from 'src/app/domain/author';
+import { Store } from '@ngrx/store';
+import { CoursesState } from 'src/app/store/courses/reducers/courses-reducer.reducer';
+import { selectCourses } from 'src/app/store/courses/selectors/courses-selectors.selectors';
+import { addCourse } from 'src/app/store/courses/actions/courses-actions.actions';
 
 @Component({
   selector: 'app-course-add',
@@ -44,7 +48,8 @@ export class CourseAddComponent implements OnInit {
 
   public constructor(private router: Router,
     private courseService: CourseService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private readonly store: Store<CoursesState>
   ) { }
 
   ngOnInit(): void {
@@ -56,13 +61,15 @@ export class CourseAddComponent implements OnInit {
   }
 
   public add(): void {
-    this.courseService.createCourse({
+    const course = {
       title: this.title.value,
       creationDate: this.creationDate.value,
       duration: this.duration.value,
       description: this.description.value,
       authors: this.authors.value,
-    } as Course).pipe(take(1)).subscribe();
+    } as Course;
+    this.store.dispatch(addCourse({ course }));
+    // this.courseService.createCourse().pipe(take(1)).subscribe();
     this.router.navigate(['courses']);
   }
 }
