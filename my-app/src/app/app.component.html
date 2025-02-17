@@ -1,16 +1,16 @@
 <div>
     <div>
-        <app-loading *ngIf="isLoad()"></app-loading>
+        <app-loading *ngIf="isLoad() | async"></app-loading>
     </div>
 
-    <div *ngIf="!isLoad()">
+    <div *ngIf="!(isLoad() | async)">
         <app-header></app-header>
-        <div *ngIf="isAuthenticated()">
+        <div *ngIf="isAuthenticated() | async">
             <p-toast />
             <p-confirmDialog></p-confirmDialog>
             <router-outlet></router-outlet>
         </div>
-        <div *ngIf="!isAuthenticated()">
+        <div *ngIf="!(isAuthenticated() | async)">
             <app-login (auth)="login($event)"></app-login>
         </div>
         <app-footer></app-footer>

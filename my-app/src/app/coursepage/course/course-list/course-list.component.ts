@@ -6,6 +6,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, Observable, of, Subject, Subscriber, switchMap, take, takeUntil, throttleTime } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import { selectCourses } from 'src/app/store/courses/selectors/courses-selectors.selectors';
+import { deleteCourse, getCourses } from 'src/app/store/courses/actions/courses-actions.actions';
 
 @Component({
   selector: 'app-course-list',
@@ -15,7 +19,6 @@ import { debounceTime, distinctUntilChanged, filter, fromEvent, Observable, of, 
 })
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
-  private search$: Subject<Course[]> = new Subject<Course[]>();
   searchInput: string = '';
   limit: number = 10;
 
@@ -23,12 +26,15 @@ export class CourseListComponent implements OnInit {
     private filterPipe: FilterPipe,
     private courseService: CourseService,
     private confirmationService: ConfirmationService,
-    private router: Router) { }
+    private router: Router,
+    private readonly store: Store<AppState>) { }
+
 
   ngOnInit(): void {
-    this.courseService.getList().subscribe(data => {
+    this.store.select(selectCourses).subscribe(data => {
       this.courses = this.orderPipe.transform(data, 'creationDate');
     });
+    this.store.dispatch(getCourses({size: 5}));
   }
 
   public search(): void {
@@ -48,10 +54,7 @@ export class CourseListComponent implements OnInit {
   }
 
   public loadMore(): void {
-    this.courseService.getList(this.limit).subscribe(data => {
-      this.courses = this.orderPipe.transform(data, 'creationDate');
-    });
-    this.limit = this.limit + 5;
+    this.store.dispatch(getCourses({}));
   }
 
   public deleteCourse(course: Course): void {
@@ -61,8 +64,7 @@ export class CourseListComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       closeOnEscape: true,
       accept: () => {
-        this.courseService.remove(course).pipe(take(1)).subscribe();
-        this.courses = this.courses.filter(c => c.id != course.id)
+        this.store.dispatch(deleteCourse({course}));
       },
       reject: () => {
         console.log('Delete action was rejected');

@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "",
@@ -112,7 +113,9 @@
   },
   "cli": {
     "schematicCollections": [
-      "angular-eslint"
+      "angular-eslint",
+      "@schematics/angular",
+      "@ngrx/schematics"
     ],
     "analytics": false
   }
