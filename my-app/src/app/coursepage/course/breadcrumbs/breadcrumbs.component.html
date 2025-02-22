@@ -1,0 +1,7 @@
+<div class="breadcrumbs-container">
+    <a routerLink="/courses" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <i class="pi pi-home breadcrumbs"><span class="text">Курсы</span></i>
+    </a>
+    <span *ngIf="title"> > </span>
+    <span class="course">{{ title }}</span>
+</div>

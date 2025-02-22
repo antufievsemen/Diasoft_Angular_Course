@@ -1,0 +1,40 @@
+<form [formGroup]="editCourseForm" (ngSubmit)="edit()" class="course-add-form">
+    <div class="displayName-field m-8rem">
+        <p>Наименование*</p>
+        <input type="text" pInputText formControlName="title" id="title" />
+        <small *ngIf="title.invalid && title.touched" class="invalid-message p-error">
+            <p *ngIf="title.hasError('required')">This field is required</p>
+            <p *ngIf="title.hasError('maxLength')">Should be less then 50 characters</p>
+        </small>
+    </div>
+    <div class="description-field m-8rem">
+        <p>Описание*</p>
+        <textarea rows="5" cols="30" pTextarea formControlName="description" id="description"></textarea>
+        <small *ngIf="description.invalid && description.touched" class="invalid-message p-error">
+            <p *ngIf="description.hasError('required')">This field is required</p>
+            <p *ngIf="description.hasError('maxLength')">Should be less then 500 characters</p>
+        </small>
+    </div>
+    <div class="duration-field m-8rem">
+        <p>Продолжительность*</p>
+        <p-inputNumber inputId="integeronly" formControlName="duration" id="duration" />
+        <span class="duration-view"> {{ duration.value | duration}}</span>
+        <small *ngIf="duration.invalid && duration.touched" class="invalid-message p-error">
+            <p *ngIf="duration.hasError('required')">This field is required</p>
+        </small>
+    </div>
+    <div class="creationDate-filed m-8rem">
+        <p>Дата*</p>
+        <p-calendar formControlName="creationDate" [showIcon]="true" [showOnFocus]="false" inputId="buttondisplay" />
+        <small *ngIf="creationDate.invalid && creationDate.touched" class="invalid-message p-error">
+            <p *ngIf="creationDate.hasError('required')">This field is required</p>
+        </small>
+    </div>
+    <div class="m-8rem">
+        <app-authors courseFormGroup="editCourseForm"></app-authors>
+    </div>
+    <div class="button-container">
+        <p-button (onClick)="cancel()" styleClass="button-rounded-bordless backgrnd-white" class="m-6rem" label="cancel" iconPos="right" />
+        <button pButton type="submit" styleClass="button-rounded-bordless blue-button" label="edit" iconPos="right" [disabled]="editCourseForm.invalid"></button>
+    </div>
+</form>
