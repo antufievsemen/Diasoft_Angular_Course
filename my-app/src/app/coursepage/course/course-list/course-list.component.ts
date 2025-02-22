@@ -10,7 +10,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectCourses } from 'src/app/store/courses/selectors/courses-selectors.selectors';
 import { deleteCourse, getCourses } from 'src/app/store/courses/actions/courses-actions.actions';
-import { CoursesState } from 'src/app/store/courses/reducers/courses-reducer.reducer';
 
 @Component({
   selector: 'app-course-list',
@@ -24,10 +23,11 @@ export class CourseListComponent implements OnInit {
   limit: number = 10;
 
   constructor(private orderPipe: OrderByPipe,
+    private filterPipe: FilterPipe,
     private courseService: CourseService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private readonly store: Store<CoursesState>) { }
+    private readonly store: Store<AppState>) { }
 
 
   ngOnInit(): void {

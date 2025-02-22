@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../domain/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
+import { LoadingService } from '../loading/loading.service';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { State, Store } from '@ngrx/store';
 import { AuthState } from '../store/courses/reducers/auth-reducer.reducer';
 import { selectIsAuthenticated } from '../store/courses/selectors/auth-selectors.selectors';
 
@@ -15,6 +16,7 @@ export class AuthService {
   user: Subject<User> = new Subject<User>();
 
   constructor(private httpClient: HttpClient,
+    private loadingService: LoadingService,
     private router: Router,
     private authStore: Store<AuthState>
   ) {

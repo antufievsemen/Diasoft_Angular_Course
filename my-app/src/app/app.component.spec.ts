@@ -1,65 +1,31 @@
-import { MockStore, createMockStore, getMockStore } from '@ngrx/store/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { AuthState } from './store/courses/reducers/auth-reducer.reducer';
-import { CoursesState } from './store/courses/reducers/courses-reducer.reducer';
-import { selectIsAuthenticated, selectIsAuthLoading } from './store/courses/selectors/auth-selectors.selectors';
-import { User } from './domain/user';
-import { login } from './store/courses/actions/auth-actions.actions';
-import { selectIsCoursesLoading } from './store/courses/selectors/courses-selectors.selectors';
 
 describe('AppComponent', () => {
-  let component: AppComponent;
-  const { build, authStore, coursesStore } = setup<AppComponent>();
-  beforeEach(() => {
-    component = build();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 
-  it('shoud select isLoading', () => {
-    spyOn(authStore, 'select')
-    spyOn(coursesStore, 'select')
+  it(`should have as title 'my-app'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('my-app');
+  });
 
-    component.isLoad();
-
-    expect(authStore.select).toHaveBeenCalledOnceWith(selectIsAuthLoading);
-    expect(coursesStore.select).toHaveBeenCalledOnceWith(selectIsCoursesLoading);
-  })
-
-  it('shoud select isAuthenticated', () => {
-    spyOn(authStore, 'select')
-
-    component.isAuthenticated();
-
-    expect(authStore.select).toHaveBeenCalledOnceWith(selectIsAuthenticated)
-  })
-
-  it('shoud dispatch action login', () => {
-    spyOn(authStore, 'dispatch')
-
-    component.login({} as User);
-    const user = {} as User;
-    expect(authStore.dispatch).toHaveBeenCalledOnceWith(login({user}))
-  })
-
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('my-app app is running!');
+  });
 });
-
-function setup<T>(): { default: () => any; build: () => T; authStore: MockStore<AuthState>, coursesStore: MockStore<CoursesState>, [key: string]: any } {
-  const initAuth = { user: undefined, isAuthenticated: false, isLoading: false } as unknown as AuthState;
-  const initCourses = { isLoading: false, courses: [], courseId: null } as unknown as CoursesState;
-  const authStore: MockStore<AuthState> = createMockStore({ initialState: initAuth })
-  const coursesStore: MockStore<CoursesState> = createMockStore({ initialState: initCourses })
-  const builder = {
-    authStore,
-    coursesStore,
-    default(): any {
-      return builder;
-    },
-    build(): any {
-      return new AppComponent(authStore, coursesStore);
-    }
-  };
-  return builder;
-}
