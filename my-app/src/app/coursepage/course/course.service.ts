@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { Course } from 'src/app/domain/course';
-import { LoadingService } from 'src/app/loading/loading.service';
 
 @Injectable()
 export class CourseService {
@@ -13,7 +12,7 @@ export class CourseService {
   }
 
   public getList(count: number = 5): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(`${this.apiUrl}/?_start=0&_limit=${count}`);
+    return this.httpClient.get<Course[]>(`${this.apiUrl}?_start=0&_limit=${count}`);
   }
 
   public createCourse(course: Course): Observable<Course> {

@@ -1,13 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/domain/course';
-import { CourseService } from '../course.service';
-import { take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Author } from 'src/app/domain/author';
 import { Store } from '@ngrx/store';
 import { CoursesState } from 'src/app/store/courses/reducers/courses-reducer.reducer';
-import { selectCourses } from 'src/app/store/courses/selectors/courses-selectors.selectors';
 import { addCourse } from 'src/app/store/courses/actions/courses-actions.actions';
 
 @Component({
@@ -47,7 +44,6 @@ export class CourseAddComponent implements OnInit {
   }
 
   public constructor(private router: Router,
-    private courseService: CourseService,
     private fb: FormBuilder,
     private readonly store: Store<CoursesState>
   ) { }
@@ -69,7 +65,6 @@ export class CourseAddComponent implements OnInit {
       authors: this.authors.value,
     } as Course;
     this.store.dispatch(addCourse({ course }));
-    // this.courseService.createCourse().pipe(take(1)).subscribe();
     this.router.navigate(['courses']);
   }
 }
