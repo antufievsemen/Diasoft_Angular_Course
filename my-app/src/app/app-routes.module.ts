@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'courses',
     loadChildren: () => import('./coursepage/course/course.module').then(m => m.CourseModule)
   },
-  // { path: '', redirectTo: '', pathMatch: 'full', },
+  { path: '', redirectTo: '', pathMatch: 'full', },
   { path: '**', pathMatch: 'full', component: NotFoundComponent },
 ];
 
