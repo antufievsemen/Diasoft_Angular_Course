@@ -18,6 +18,6 @@ export class LoginComponent {
   ) {}
 
   public login(): void {
-    console.log('login');
+    this.authService.login({email: this.email,  password: this.password} as User);
   }
 }

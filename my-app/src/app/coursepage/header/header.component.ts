@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { User } from 'src/app/domain/user';
 import { AuthService } from '../auth.service';
 
@@ -8,11 +7,14 @@ import { AuthService } from '../auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   user: User | undefined = undefined;
 
   constructor(
     private authService: AuthService) {
+  }
+  ngOnInit(): void {
+    this.user = this.authService.getUserInfo();
   }
 
   public openProfile(): void {
