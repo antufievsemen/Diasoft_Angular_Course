@@ -19,6 +19,7 @@ import { CourseEditComponent } from './course-edit/course-edit.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 import { CourseRouteModule } from './course-route/course-route.module';
+import { CourseComponent } from './course.component';
 
 
 
@@ -30,7 +31,8 @@ import { CourseRouteModule } from './course-route/course-route.module';
     CourseAddComponent,
     AuthorsComponent,
     CourseEditComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    CourseComponent
   ],
   imports: [
     CommonModule,

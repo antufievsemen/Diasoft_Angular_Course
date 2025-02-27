@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { findIndex } from 'rxjs';
 import { Course } from 'src/app/domain/course';
 
 @Injectable({
