@@ -1,17 +1,16 @@
 import { inject, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
-import { CourseAddComponent } from '../course-add/course-add.component';
-import { CourseEditComponent } from '../course-edit/course-edit.component';
-import { CourseListComponent } from '../course-list/course-list.component';
-import { AuthService } from '../../auth.service';
-import { CourseComponent } from '../course.component';
+import { CourseAddComponent } from './course-add/course-add.component';
+import { CourseEditComponent } from './course-edit/course-edit.component';
+import { CourseListComponent } from './course-list/course-list.component';
+import { AuthService } from '../auth.service';
+import { CourseComponent } from './course.component';
 
 const canActivateCourse: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   return inject(AuthService).isAuthenticated();
 }
 
 const routes2: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/courses' },
   {
     path: '', component: CourseComponent, children: [
       { path: '', component: CourseListComponent, canActivate: [canActivateCourse] },

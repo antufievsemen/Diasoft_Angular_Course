@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginModule } from './coursepage/login/login.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AppRoutesModule } from './app-routes/app-routes.module';
+import { AppRoutesModule } from './app-routes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -33,7 +33,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginModule,
     AppRoutesModule
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
