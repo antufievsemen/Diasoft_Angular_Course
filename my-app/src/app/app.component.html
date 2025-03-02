@@ -1,10 +1,15 @@
 <div>
-    <app-header></app-header>
-
-    <div>
-        <app-breadcrumbs></app-breadcrumbs>
+    <ng-container *ngIf="isAuthenticated(); else unauthorized">
+        <app-header></app-header>
+        <app-breadcrumbs [ngClass]="{ 'display-none' : !isAuthenticated()}"></app-breadcrumbs>
         <app-course-list></app-course-list>
-        <app-footer></app-footer>
-    </div>
+    </ng-container>
 
+    <ng-template  #unauthorized>
+        <app-header></app-header>
+        <app-breadcrumbs [ngClass]="{ 'display-none' : !isAuthenticated()}"></app-breadcrumbs>
+        <app-login (auth)="login($event)"></app-login>
+    </ng-template>
+    
+    <app-footer></app-footer>
 </div>

@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from 'src/app/domain/course';
 
@@ -6,7 +5,6 @@ import { Course } from 'src/app/domain/course';
   selector: 'app-course-item',
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.scss'],
-  providers: [TitleCasePipe]
 })
 export class CourseItemComponent {
   @Input()
@@ -17,10 +15,10 @@ export class CourseItemComponent {
   public editCourse: EventEmitter<Course> = new EventEmitter<Course>();
 
   public delete(): void {
-    console.log('Delete ' + this.course.id);
+    this.deleteCourse.emit(this.course);
   }
 
   public edit(): void {
-    console.log('Edit ' + this.course.id);
+    this.editCourse.emit(this.course);
   }
 }
