@@ -1,16 +1,16 @@
 <div>
-    <div class="login-form">
+    <form #myForm="ngForm" class="login-form" (ngSubmit)="login(myForm)">
         <div class="flex flex-col gap-2">
             <label class="r-2px" for="username">Username</label>
-            <input pInputText id="username" type="text" [(ngModel)]="email" />
+            <input pInputText id="username" type="text" ngModel name="email" required email/>
         </div>
         <div class="flex flex-col gap-2">
             <label class="r-2px" for="password">Password</label>
-            <input pInputText id="password" type="password" [(ngModel)]="password" />
+            <input pInputText id="password" type="password" ngModel name="password" required/>
         </div>
         <div class="flex">
-            <p-button (onClick)="login()" label="Login" icon="pi pi-user" class="w-full max-w-[17.35rem]"
-                styleClass="w-full mx-auto" />
+            <button pButton type="submit" label="Login" icon="pi pi-user" class="w-full max-w-[17.35rem]"
+                styleClass="w-full mx-auto" [disabled]="myForm.invalid"></button>
         </div>
-    </div>
-</div>
+    </form>
+</div>  

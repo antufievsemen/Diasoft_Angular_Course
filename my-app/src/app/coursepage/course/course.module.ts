@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { FilterPipe } from './course-list/pipe/filter.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { DurationPipe } from 'src/app/shared/pipe/duration.pipe';
 import { HighlighterDirective } from 'src/app/shared/directive/highlighter.directive';
@@ -19,19 +19,14 @@ import { CourseEditComponent } from './course-edit/course-edit.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 import { CourseRouteModule } from './course-route/course-route.module';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
+import { AuthorsService } from './authors/authors.service';
+import { CourseService } from './course.service';
 
 
 
 @NgModule({
-  declarations: [
-    CourseListComponent,
-    CourseItemComponent,
-    FilterPipe,
-    CourseAddComponent,
-    AuthorsComponent,
-    CourseEditComponent,
-    BreadcrumbsComponent
-  ],
   imports: [
     CommonModule,
     CardModule,
@@ -43,7 +38,23 @@ import { CourseRouteModule } from './course-route/course-route.module';
     CalendarModule,
     InputNumberModule,
     CourseRouteModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    MultiSelectModule,
+    DropdownModule
   ],
+  declarations: [
+    CourseListComponent,
+    CourseItemComponent,
+    FilterPipe,
+    CourseAddComponent,
+    AuthorsComponent,
+    CourseEditComponent,
+    BreadcrumbsComponent
+  ],
+  providers: [
+    {provide: CourseService, useClass: CourseService},
+    {provide: AuthorsService, useClass: AuthorsService}
+  ]
 })
 export class CourseModule { }

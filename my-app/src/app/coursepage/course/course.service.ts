@@ -4,9 +4,7 @@ import { Observable, take } from 'rxjs';
 import { Course } from 'src/app/domain/course';
 import { LoadingService } from 'src/app/loading/loading.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CourseService {
   private readonly apiUrl = '/videocourses';
 
