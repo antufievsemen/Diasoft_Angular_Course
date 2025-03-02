@@ -1,7 +1,7 @@
 <header>
     <div class="header">
         <div class="logo"><app-logo></app-logo></div>
-        <div class="menu" *ngIf="isAuthenticated()">
+        <div class="menu" *ngIf="isAuthenticated() | async">
             <div class="profile">
                 <p-button styleClass="button-rounded-bordless backgrnd-white" [label]="displayName" rounded="true"
                     icon="pi pi-user" (click)="openProfile()">

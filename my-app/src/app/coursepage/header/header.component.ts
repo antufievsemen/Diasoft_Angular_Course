@@ -1,7 +1,10 @@
 import { AfterViewChecked, ChangeDetectionStrategy, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { interval, Subscription } from 'rxjs';
+import { interval, Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AuthState } from 'src/app/store/courses/reducers/auth-reducer.reducer';
+import { logout } from 'src/app/store/courses/actions/auth-actions.actions';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router) {
+    private store: Store<AuthState>) {
   }
 
   ngOnDestroy(): void {
@@ -22,20 +25,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userInfo$ = this.authService.getUserInfo().subscribe(data => { 
+    this.userInfo$ = this.authService.getUserInfo().subscribe(data => {
       if (data && data.firstName)
-      this.displayName = data.firstName + ' ' + data.lastName });
+        this.displayName = data.firstName + ' ' + data.lastName
+    });
   }
 
   public openProfile(): void {
   }
 
   public logout(): void {
-    this.authService.logout();
-    this.router.navigate(['']);
+    this.store.dispatch(logout());
   }
 
-  public isAuthenticated(): boolean {
+  public isAuthenticated(): Observable<boolean> {
     return this.authService.isAuthenticated();
   }
 }

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService } from './coursepage/auth.service';
 import { User } from './domain/user';
-import { Router } from '@angular/router';
-import { LoadingService } from './loading/loading.service';
+import { AuthState } from './store/courses/reducers/auth-reducer.reducer';
+import { Store } from '@ngrx/store';
+import { selectIsAuthenticated, selectIsAuthLoading } from './store/courses/selectors/auth-selectors.selectors';
+import { Observable } from 'rxjs';
+import { login } from './store/courses/actions/auth-actions.actions';
+import { CoursesState } from './store/courses/reducers/courses-reducer.reducer';
+import { selectIsCoursesLoading } from './store/courses/selectors/courses-selectors.selectors';
 
 @Component({
   selector: 'app-root',
@@ -10,29 +14,19 @@ import { LoadingService } from './loading/loading.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private authService: AuthService,
-    private router: Router,
-    private loadingService: LoadingService
+  constructor(private authStore: Store<AuthState>,
+    private storeCourses: Store<CoursesState>
   ) { }
 
-  public isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  public isAuthenticated(): Observable<boolean> {
+    return this.authStore.select(selectIsAuthenticated);
   }
 
-  public login(user: User) {
-    if (!this.authService.isAuthenticated()) {
-      this.authService.login(user).subscribe(data => {
-        if (data && data[0]) {
-          localStorage.setItem('token', data[0].fakeToken);
-          this.authService.setUserInfo(data[0]);
-          this.router.navigate(['courses']);
-        }
-      });
-
-    }
+  public login(user: User): void {
+    this.authStore.dispatch(login({ user }));
   }
 
-  public isLoad() : boolean{
-    return this.loadingService.getState();
+  public isLoad(): Observable<boolean> {
+    return this.authStore.select(selectIsAuthLoading) || this.storeCourses.select(selectIsCoursesLoading);
   }
 }

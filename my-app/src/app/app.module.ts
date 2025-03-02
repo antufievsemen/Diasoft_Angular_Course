@@ -20,6 +20,15 @@ import { HttpErrorInterceptor } from './coursepage/httperrorinterceptor.service'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { StoreModule } from '@ngrx/store';
+import * as fromState from './store';
+import { environment } from './environments/environmet';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './store/courses/effects/courses-effects.effects';
+import { CourseService } from './coursepage/course/course.service';
+import { AuthEffects } from './store/courses/effects/auth-effects.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -42,12 +51,17 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     HttpClientModule,
     ToastModule,
     ConfirmDialogModule,
+    StoreModule.forRoot(fromState.reducers, { metaReducers: fromState.metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    EffectsModule.forRoot([CoursesEffects, AuthEffects]),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-  { provide: MessageService, useClass: MessageService},
-  { provide: ConfirmationService, useClass: ConfirmationService}
+  { provide: MessageService, useClass: MessageService },
+  { provide: ConfirmationService, useClass: ConfirmationService },
+  { provide: CourseService, useClass: CourseService }
   ],
   bootstrap: [AppComponent],
 })

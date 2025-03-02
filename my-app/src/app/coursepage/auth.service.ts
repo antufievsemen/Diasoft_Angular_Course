@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { User } from '../domain/user';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { LoadingService } from '../loading/loading.service';
+import { Router } from '@angular/router';
+import { State, Store } from '@ngrx/store';
+import { AuthState } from '../store/courses/reducers/auth-reducer.reducer';
+import { selectIsAuthenticated } from '../store/courses/selectors/auth-selectors.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -12,31 +16,39 @@ export class AuthService {
   user: Subject<User> = new Subject<User>();
 
   constructor(private httpClient: HttpClient,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private router: Router,
+    private authStore: Store<AuthState>
   ) {
   }
 
-  public login(user: User): Observable<User[]> {
-    this.loadingService.setState(true);
-    const res = this.httpClient.get<User[]>(`${this.apiUrl}?email=${user.email}&password=${user.password}`);
-    this.loadingService.setState(false);
-    return res;
+  public login(user: User): Observable<any> {
+    this.httpClient.get<User[]>(`${this.apiUrl}?email=${user.email}&password=${user.password}`)
+      .subscribe(data => {
+        if (data && data[0]) {
+          localStorage.setItem('token', data[0].fakeToken);
+          this.setUserInfo(data[0]);
+          this.router.navigate(['courses']);
+        }
+      });
+    return of(user);
   }
 
-  public logout(): void {
+  public logout(): Observable<any> {
     localStorage.clear();
+    this.router.navigate(['']);
+    return of(1);
   }
 
-  public isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+  public isAuthenticated(): Observable<boolean> {
+    return this.authStore.select(selectIsAuthenticated);
   }
 
   public setUserInfo(user: User): void {
-      this.user.next(user);
+    this.user.next(user);
   }
 
   public getUserInfo(): Subject<User> {
-    // return this.httpClient.get<User[]>(`${this.apiUrl}?fakeToken`);
     return this.user;
   }
 }

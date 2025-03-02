@@ -3,6 +3,11 @@ import { CourseService } from '../course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { selectQueryParams, selectRouteParams, selectUrl } from 'src/app/store';
+import { CoursesState } from 'src/app/store/courses/reducers/courses-reducer.reducer';
+import { editCourse } from 'src/app/store/courses/actions/courses-actions.actions';
+import { Course } from 'src/app/domain/course';
 
 @Component({
   selector: 'app-course-edit',
@@ -21,9 +26,10 @@ export class CourseEditComponent implements OnInit {
 
   public constructor(
     private courseService: CourseService,
-    private activeRoute: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private routerStore: Store,
+    private courseStore: Store<CoursesState>
   ) { }
 
   public get duration(): FormControl {
@@ -47,15 +53,17 @@ export class CourseEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(data => {
+    this.routerStore.select(selectRouteParams).subscribe(data => {
       this.id = data['id'];
-      this.courseService.getItemById(this.id).subscribe(course => {
-        this.title.patchValue(course.title);
-        this.creationDate.patchValue(new Date(course.creationDate));
-        this.description.patchValue(course.description);
-        this.duration.patchValue(course.duration);
-        this.authors.patchValue(course.authors);
-      });
+      if (this.id) {
+        this.courseService.getItemById(this.id).subscribe(course => {
+          this.title.patchValue(course.title);
+          this.creationDate.patchValue(new Date(course.creationDate));
+          this.description.patchValue(course.description);
+          this.duration.patchValue(course.duration);
+          this.authors.patchValue(course.authors);
+        });
+      }
     });
   }
 
@@ -65,14 +73,15 @@ export class CourseEditComponent implements OnInit {
   }
 
   public edit(): void {
-    this.courseService.update({
+    const course: Course = {
       id: this.id,
       title: this.title.value,
       creationDate: this.creationDate.value,
       duration: this.duration.value,
       description: this.description.value,
       authors: this.authors.value
-    }).pipe(take(1)).subscribe();
+    }
+    this.courseStore.dispatch(editCourse({ course }))
     this.router.navigate(['courses']);
   }
 }

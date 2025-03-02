@@ -4,10 +4,9 @@ import { CourseAddComponent } from '../course-add/course-add.component';
 import { CourseEditComponent } from '../course-edit/course-edit.component';
 import { CourseListComponent } from '../course-list/course-list.component';
 import { AuthService } from '../../auth.service';
-import { of } from 'rxjs';
 
 const canActivateCourse: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return of(inject(AuthService).isAuthenticated());
+  return inject(AuthService).isAuthenticated();
 }
 
 const routes2: Routes = [
