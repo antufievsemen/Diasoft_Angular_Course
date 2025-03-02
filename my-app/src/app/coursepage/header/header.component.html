@@ -3,12 +3,13 @@
         <div class="logo"><app-logo></app-logo></div>
         <div class="menu" *ngIf="isAuthenticated()">
             <div class="profile">
-                <p-button styleClass="button-rounded-bordless backgrnd-white" [label]="displayName" rounded="true" icon="pi pi-user" (click)="openProfile()">
+                <p-button styleClass="button-rounded-bordless backgrnd-white" [label]="displayName" rounded="true"
+                    icon="pi pi-user" (click)="openProfile()">
                 </p-button>
-                <span></span>
             </div>
             <div class="exit">
-                <p-button (onClick)="logout()" styleClass="button-rounded-bordless backgrnd-white" label="Logout" variant="text" icon="pi pi-sign-out"></p-button>
+                <p-button (onClick)="logout()" styleClass="button-rounded-bordless backgrnd-white" label="Logout"
+                    variant="text" icon="pi pi-sign-out"></p-button>
             </div>
         </div>
     </div>

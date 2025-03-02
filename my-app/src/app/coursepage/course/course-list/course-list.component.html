@@ -2,9 +2,9 @@
     <app-breadcrumbs></app-breadcrumbs>
     <div class="course-header-container">
         <div class="search-container">
-            <input class="search-input" type="text" pInputText [(ngModel)]="searchInput" />
-            <p-button styleClass="button-rounded-bordless search-button" class="search-button" label="Search"
-                (onClick)="search()" />
+            <input class="search-input" type="text" pInputText [(ngModel)]="searchInput" (keyup)="search()"/>
+            <!-- <p-button styleClass="button-rounded-bordless search-button" class="search-button" label="Search"
+                (onClick)="search()" /> -->
         </div>
         <div class="options-container">
             <p-button (onClick)="navigateAddCourse()" styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
@@ -15,8 +15,6 @@
         <i class="pi pi-ban" style="font-size: 2rem;"></i>
         <div class="courses-not-found">Нет данных</div>
     </div>
-    <p-toast />
-    <p-confirmDialog></p-confirmDialog>
     <div *ngIf="courses.length">
         <div class="course-list" *ngFor="let i of courses">
             <app-course-item [course]="i" (deleteCourse)="deleteCourse($event)" (editCourse)="navigateEditCourse($event)">

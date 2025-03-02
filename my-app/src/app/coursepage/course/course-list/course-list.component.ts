@@ -5,16 +5,17 @@ import { CourseService } from '../course.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
 import { Router } from '@angular/router';
-import { Observable, take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, fromEvent, Observable, of, Subject, Subscriber, switchMap, take, takeUntil, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
-  providers: [MessageService, ConfirmationService, OrderByPipe, FilterPipe]
+  providers: [OrderByPipe, FilterPipe]
 })
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
+  private search$: Subject<Course[]> = new Subject<Course[]>();
   searchInput: string = '';
   limit: number = 10;
 
@@ -31,9 +32,15 @@ export class CourseListComponent implements OnInit {
   }
 
   public search(): void {
-    this.courseService.filterCourses(this.searchInput).subscribe(data => {
+    of(this.searchInput).pipe(
+      debounceTime(250),
+      filter(text => !!text && text.length >= 3),
+      distinctUntilChanged(),
+      switchMap((value) => this.courseService.filterCourses(value)),
+    ).subscribe(data => {
       this.courses = this.orderPipe.transform(data, 'creationDate');
     })
+
   }
 
   public navigateAddCourse(): void {
