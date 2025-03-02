@@ -5,24 +5,25 @@ import { User } from '../domain/user';
   providedIn: 'root'
 })
 export class AuthService {
-  user: User | undefined = undefined;
 
   constructor() { 
   }
 
   public login(user: User): void {
-    this.user = user;
+    localStorage.setItem('auth-email', user.email);
+    localStorage.setItem('auth-password', user.password);
   }
 
   public logout(): void {
-    this.user = undefined;
+    localStorage.removeItem('auth-email');
+    localStorage.removeItem('auth-password');
   }
 
   public isAuthenticated(): boolean {
-    return this.user ? true : false;
+    return !!(localStorage.getItem('auth-email') && localStorage.getItem('auth-password'));
   }
 
   public getUserInfo(): User | undefined {
-    return this.user;
+    return {email: localStorage.getItem('auth-email'), password: localStorage.getItem('auth-password')} as User;
   }
 }

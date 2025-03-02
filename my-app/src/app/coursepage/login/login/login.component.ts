@@ -15,9 +15,9 @@ export class LoginComponent {
 
   public constructor(
     private authService: AuthService
-  ) {}
+  ) { }
 
   public login(): void {
-    console.log('login');
+    this.auth.emit({ email: this.email, password: this.password } as User)
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent {
+  @Input()
+  title: string = '';
 
+  public constructor(
+  ) { }
 }

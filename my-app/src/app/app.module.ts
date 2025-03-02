@@ -8,10 +8,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './coursepage/header/header.component';
 import { LogoComponent } from './coursepage/logo/logo.component';
 import { FooterComponent } from './coursepage/footer/footer.component';
-import { BreadcrumbsComponent } from './coursepage/breadcrumbs/breadcrumbs.component';
 import { FormsModule } from '@angular/forms';
-import { CourseModule } from './coursepage/course/course.module';
 import { LoginModule } from './coursepage/login/login.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AppRoutesModule } from './app-routes.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,18 +21,18 @@ import { LoginModule } from './coursepage/login/login.module';
     HeaderComponent,
     LogoComponent,
     FooterComponent,
-    BreadcrumbsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CardModule,
     ButtonModule,
     PanelModule,
     FormsModule,
-    CourseModule,
-    LoginModule
+    LoginModule,
+    AppRoutesModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

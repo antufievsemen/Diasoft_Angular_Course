@@ -1,4 +1,4 @@
-<app-breadcrumbs></app-breadcrumbs>
+<app-breadcrumbs [title]="displayName"></app-breadcrumbs>
 <div class="course-add-form">
     <div class="displayName-field m-8rem">
         <p>Наименование*</p>
@@ -22,6 +22,6 @@
     </div>
     <div class="button-container">
         <p-button (onClick)="cancel()" styleClass="button-rounded-bordless backgrnd-white" class="m-6rem" label="cancel" iconPos="right" />
-        <p-button (onClick)="add()" styleClass="button-rounded-bordless blue-button" class="m-6rem" label="add" iconPos="right" />
+        <p-button (onClick)="save()" styleClass="button-rounded-bordless blue-button" class="m-6rem" label="save" iconPos="right" />
     </div>
 </div>

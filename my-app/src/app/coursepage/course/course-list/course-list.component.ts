@@ -4,6 +4,7 @@ import { FilterPipe } from './pipe/filter.pipe';
 import { CourseService } from '../course.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OrderByPipe } from 'src/app/shared/pipe/order-by.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -18,7 +19,8 @@ export class CourseListComponent implements OnInit {
   constructor(private orderPipe: OrderByPipe,
     private filterPipe: FilterPipe,
     private courseService: CourseService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.courses = this.courseService.getList();
@@ -30,11 +32,10 @@ export class CourseListComponent implements OnInit {
   }
 
   public addCourse(): void {
-    console.log('Add course');
+    this.router.navigate(['courses', 'new'])
   }
 
   public loadMore(): void {
-    this.courses.length
     console.log('Load more');
   }
 
@@ -55,8 +56,8 @@ export class CourseListComponent implements OnInit {
 
   }
 
-  public editCourse(course: any): void {
-    console.log('Edit ' + course.id);
+  public editCourse(course: Course): void {
+    this.router.navigate(['courses/', course.id])
   }
 }
 

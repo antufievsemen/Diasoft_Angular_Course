@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { findIndex } from 'rxjs';
 import { Course } from 'src/app/domain/course';
 
 @Injectable({
@@ -27,11 +26,19 @@ export class CourseService {
   }
 
   public getItemById(id: number): Course {
-    return this.courses.filter(a => a.id === id)[0];
+    return this.courses.filter(a => a.id === Number(id))[0];
   }
 
-  public update(): Course {
-    return {} as Course;
+  public update(course: Course): Course {
+    let old = this.courses.find(c => c.id === Number(course.id))
+    if (old) {
+      old.creationDate = course.creationDate;
+      old.description = course.description;
+      old.duration = course.duration;
+      old.title = course.title;
+      return old;
+    }
+    return course;
   }
 
   public remove(course: Course): void {
