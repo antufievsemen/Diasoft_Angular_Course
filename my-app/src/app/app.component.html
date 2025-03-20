@@ -1,19 +1,19 @@
-<div>
+<div class="container">
     <div>
         <app-loading *ngIf="isLoad() | async"></app-loading>
     </div>
 
-    <div *ngIf="!(isLoad() | async)">
-        <app-header></app-header>
-        <div *ngIf="isAuthenticated() | async">
+    <div *ngIf="!(isLoad() | async)" class="view-container">
+        <app-header class="header-container"></app-header>
+        <div *ngIf="isAuthenticated() | async" class="main-container">
             <p-toast />
             <p-confirmDialog></p-confirmDialog>
             <router-outlet></router-outlet>
         </div>
-        <div *ngIf="!(isAuthenticated() | async)">
+        <div *ngIf="!(isAuthenticated() | async)" class="login-container">
             <app-login (auth)="login($event)"></app-login>
         </div>
-        <app-footer></app-footer>
+        <app-footer class="footer-container"></app-footer>
     </div>
 
 

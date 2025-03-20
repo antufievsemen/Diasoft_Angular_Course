@@ -1,7 +1,44 @@
 * {
-    background-color: rgba(184, 188, 243, 0.973);
+    margin: 0;
+    padding: 0;
 }
 
 .display-none {
     display: none;
+}
+
+.container {
+
+}
+
+.header-container {
+    // min-height: 4vh;
+}
+
+.footer-container {
+    color: white;
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    display: flex;
+    flex:1;
+    justify-content: center;
+    align-items: start;
+}
+
+.view-container {
+    min-height: 100vh;
+    // max-height: 100vh;
+    min-width: 100%;
+    background-color: #E2E8F0;
+    display: flex;
+    flex-direction: column;
 }

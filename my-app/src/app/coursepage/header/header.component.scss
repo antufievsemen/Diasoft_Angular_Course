@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    background-color: white;
+    background-color: #F8FAFC;
 }
 
 .menu {
@@ -13,4 +13,11 @@
 
 .profile {
     padding-right: 0.5rem;
+}
+
+:host ::ng-deep .p-button {
+    background-color: white;
+    color: black;
+    font-style: normal;
+    border: 0;
 }

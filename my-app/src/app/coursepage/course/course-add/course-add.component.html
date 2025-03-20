@@ -1,7 +1,7 @@
 <form [formGroup]="addCourseForm" (ngSubmit)="add()" class="course-add-form">
     <div class="displayName-field m-8rem">
         <p>Наименование*</p>
-        <input type="text" pInputText formControlName="title" id="title" />
+        <input type="text" pInputText formControlName="title" id="title" style="height: 38px;"/>
         <small *ngIf="title.invalid && title.touched" class="invalid-message p-error">
             <p *ngIf="title.hasError('required')">This field is required</p>
             <p *ngIf="title.hasError('maxLength')">Should be less then 50 characters</p>

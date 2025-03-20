@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional, ViewEncapsulation } from '@angular/core';
 import { Course } from 'src/app/domain/course';
 import { FilterPipe } from './pipe/filter.pipe';
 import { CourseService } from '../course.service';
@@ -16,7 +16,7 @@ import { CoursesState } from 'src/app/store/courses/reducers/courses-reducer.red
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
-  providers: [OrderByPipe, FilterPipe]
+  providers: [OrderByPipe, FilterPipe],
 })
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];

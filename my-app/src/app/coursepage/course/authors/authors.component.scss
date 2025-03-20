@@ -5,3 +5,12 @@
 .invalid-message {
     color: red;
 }
+
+.form-container {
+    display: flex;
+    overflow-wrap: break-word; /* Современный аналог word-wrap */
+}
+
+.w-full {
+    width: inherit;
+}

@@ -1,5 +1,5 @@
-<div [formGroup]="form" class="card flex justify-center" style="background-color: white;">
-    <p-multiSelect [options]="all" formControlName="authors" placeholder="Select authors" optionLabel="name" display="chip" styleClass="w-full md:w-80" />
+<div [formGroup]="form" class="form-container">
+    <p-multiSelect [options]="all" formControlName="authors" placeholder="Select authors" optionLabel="name" display="chip" styleClass="w-full md:w-80" [maxSelectedLabels]="3"/>
     <small *ngIf="authors.invalid && authors.touched" class="invalid-message p-error">
         <p *ngIf="authors.hasError('required')" style="background-color: lightblue;">Author is required</p>
     </small>

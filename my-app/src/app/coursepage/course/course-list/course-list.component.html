@@ -8,11 +8,15 @@
         </div>
         <div class="options-container">
             <p-button (onClick)="navigateAddCourse()" styleClass="button-rounded-bordless add-button" class="add-course-button" label="Add course"
+            icon="pi pi-plus"
                 severity="info" />
         </div>
     </div>
     <div class="not-found-container" *ngIf="!courses.length">
-        <i class="pi pi-ban" style="font-size: 2rem;"></i>
+        <div class="obtain-circle">
+            <i class="pi pi-ban" style="font-size: 4rem; color: #3B82F6;"></i>
+        </div>
+        
         <div class="courses-not-found">Нет данных</div>
     </div>
     <div *ngIf="courses.length">
@@ -20,7 +24,7 @@
             <app-course-item [course]="i" (deleteCourse)="deleteCourse($event)" (editCourse)="navigateEditCourse($event)">
             </app-course-item>
         </div>
-        <div class="course-list-button">
+        <div class="course-list-button .load-more-button">
             <p-button (onClick)="loadMore()" styleClass="button-rounded-bordless backgrnd-white" label="Load more" iconPos="right" />
         </div>
     </div>

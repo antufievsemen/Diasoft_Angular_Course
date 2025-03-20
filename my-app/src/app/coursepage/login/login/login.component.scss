@@ -1,12 +1,40 @@
 .login-form {
-    text-align: center;
-    margin: 1rem;
+    margin: auto;
+    padding: 2rem 1rem 1.5rem 1.5rem;
+    background-color: #FFFFFF;
+    width: 360px;
+    height: 368px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.gap-2 {
-    padding: 2px;
+.login-label {
+    font-size: 2rem;
 }
 
-.r-2px {
-    margin-right: 2px;
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.box-gap-1 {
+    margin-top: 1rem;
+}
+
+.box-gap-3 {
+    margin-top: 3rem;
+}
+
+.label-size {
+    font-size: larger;
+}
+
+.input-h {
+    height: 40px;
+    width: 100%;
+}
+
+.align-right {
+    text-align: right;
 }

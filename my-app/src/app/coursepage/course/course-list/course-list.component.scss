@@ -1,6 +1,14 @@
 .course-list-container {
-    height: 80%;
+    display: flex;
+    min-width: 100vh;
+    flex-direction: column;
+    // text-align: center;
+    // justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
 }
+
 .course-list {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -16,8 +24,7 @@
 }
 
 .courses-not-found {
-    font-size: large;
-    font-weight: bold;
+    font-size: 2rem;
 }
 
 .course-header-container {
@@ -27,11 +34,36 @@
 .search-container {
     margin-left: 2rem;
 }
+
 .search-input {
     margin-right: 0.7rem;
+    height: 48px;
+    width: 360px;
 }
 
 .options-container {
     margin-left: auto;
     margin-right: 2rem;
+}
+
+:host ::ng-deep .pi-ban {
+    font-size: 2rem;
+}
+
+.obtain-circle {
+    position: relative;
+    z-index: 1;
+}
+
+.obtain-circle:before {
+    content: ""; /* Псевдоэлемент не содержит текста */
+    position: absolute; /* Абсолютное позиционирование для круга */
+    top: 50%; /* Центрируем круг по вертикали */
+    left: 50%; /* Центрируем круг по горизонтали */
+    width: 80px; /* Ширина круга */
+    height: 80px; /* Высота круга */
+    background-color: rgb(219, 234, 254, 0.5); /* Полупрозрачный синий цвет (RGBA) */
+    border-radius: 50%; /* Делаем кругом */
+    transform: translate(-50%, -50%); /* Центрируем круг относительно его размеров */
+    z-index: 0; /* Устанавливаем z-index ниже, чтобы круг был позади контента */
 }

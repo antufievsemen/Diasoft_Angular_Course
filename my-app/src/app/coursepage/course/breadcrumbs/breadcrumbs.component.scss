@@ -5,16 +5,22 @@
     background-color: white;
     border-radius: 5px;
     height: 3rem;
+    // width: 100%;
+}
+
+a:visited {
+    color: inherit; /* Устанавливает цвет ссылки таким же, как у родительского элемента */
+    text-decoration: none; /* Убирает подчеркивание */
 }
 
 .text {
     padding-left: 0.7rem;
+    font-size: larger;
 }
 
 .breadcrumbs {
     margin-left: 1rem;
     padding: 0.8rem;
-    
 }
 
 .course {
